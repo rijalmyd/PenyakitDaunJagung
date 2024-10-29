@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.home.HomeFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            app:title="Hi, Selamat Datang!"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/yellow"
+            android:layout_marginHorizontal="16dp"
+            android:id="@+id/card"
+            style="@style/Widget.Material3.CardView.Filled"
+            app:layout_constraintTop_toBottomOf="@id/toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="32dp">
+
+                <TextView
+                    android:id="@+id/tv_location"
+                    style="@style/TextAppearance.Material3.TitleLarge"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:text="Kabupaten Gowa"
+                    android:gravity="bottom"
+                    android:textSize="18sp"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    app:layout_constraintEnd_toStartOf="@id/iv_weather"
+                    app:drawableStartCompat="@drawable/ic_location"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_weather"
+                    android:layout_width="0dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="Berawan sebagian - 26C/33C"
+                    app:layout_constraintEnd_toStartOf="@id/iv_weather"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_location" />
+
+                <ImageView
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:id="@+id/iv_weather"
+                    android:src="@drawable/ic_cloud_windy"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_title_detection"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Deteksi penyakit jagung Anda"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintTop_toBottomOf="@id/card"
+            app:layout_constraintStart_toStartOf="@id/card"
+            app:layout_constraintEnd_toEndOf="@id/card" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="@color/secondary"
+            android:layout_margin="16dp"
+            android:id="@+id/card_detection"
+            style="@style/Widget.Material3.CardView.Filled"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_detection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp"
+                android:paddingTop="32dp">
+
+                <ImageView
+                    android:id="@+id/iv_get_image"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_get_image"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/iv_arrow"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/ic_arrow_right"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_diagnose"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_get_image"
+                    app:layout_constraintTop_toTopOf="@id/iv_get_image"
+                    app:layout_constraintBottom_toBottomOf="@id/iv_get_image"/>
+
+                <ImageView
+                    android:id="@+id/iv_diagnose"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:src="@drawable/ic_diagnose"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/iv_arrow"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_get_image"
+                    android:layout_marginTop="8dp"
+                    android:textAlignment="center"
+                    android:text="Ambil\nGambar"
+                    app:layout_constraintTop_toBottomOf="@id/iv_get_image"
+                    app:layout_constraintStart_toStartOf="@id/iv_get_image"
+                    app:layout_constraintEnd_toEndOf="@id/iv_get_image" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/tv_diagnose"
+                    android:layout_marginTop="8dp"
+                    android:textAlignment="center"
+                    android:text="Lihat\nDiagnosa"
+                    app:layout_constraintTop_toBottomOf="@id/iv_diagnose"
+                    app:layout_constraintStart_toStartOf="@id/iv_diagnose"
+                    app:layout_constraintEnd_toEndOf="@id/iv_diagnose" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_detect"
+                    android:layout_width="0dp"
+                    android:layout_height="56dp"
+                    android:layout_marginTop="16dp"
+                    android:text="Deteksi"
+                    app:backgroundTint="@color/primary"
+                    app:layout_constraintTop_toBottomOf="@id/tv_get_image"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_title_history"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="Riwayat deteksi"
+            style="@style/TextAppearance.Material3.TitleMedium"
+            app:layout_constraintTop_toBottomOf="@id/card_detection"
+            app:layout_constraintStart_toStartOf="@id/card_detection"
+            app:layout_constraintEnd_toEndOf="@id/card_detection" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_history"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_history"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tidak ada riwayat"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:id="@+id/view_empty"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="64dp"
+            style="@style/TextAppearance.Material3.TitleLarge"
+            app:drawableTopCompat="@drawable/ic_history"
+            app:layout_constraintTop_toBottomOf="@id/tv_title_history"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

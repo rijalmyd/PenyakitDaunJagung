@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.detail.DetailActivity">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="Detail"
+        app:titleCentered="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:dividerColor="@color/primary"
+        app:dividerThickness="0.5dp"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+   <androidx.core.widget.NestedScrollView
+       android:layout_width="match_parent"
+       android:layout_height="0dp"
+       app:layout_constraintTop_toBottomOf="@id/toolbar"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent">
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:padding="16dp"
+           android:orientation="vertical">
+
+           <com.google.android.material.card.MaterialCardView
+               android:id="@+id/cv_corn_or_not"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_marginBottom="16dp"
+               android:visibility="gone"
+               app:cardBackgroundColor="?attr/colorErrorContainer"
+               style="@style/Widget.Material3.CardView.Elevated">
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal"
+                   android:padding="16dp"
+                   android:gravity="center_vertical"
+                   tools:ignore="UselessLeaf">
+
+                   <ImageView
+                       android:layout_width="24dp"
+                       android:layout_height="24dp"
+                       android:src="@drawable/ic_alert"
+                       app:tint="?attr/colorOnErrorContainer" />
+
+                   <TextView
+                       android:layout_width="match_parent"
+                       android:layout_height="wrap_content"
+                       android:layout_marginStart="16dp"
+                       android:textColor="?attr/colorOnErrorContainer"
+                       style="@style/TextAppearance.Material3.BodyLarge"
+                       android:text="Gambar yang dideteksi terindikasi bukan daun jagung!" />
+               </LinearLayout>
+           </com.google.android.material.card.MaterialCardView>
+
+
+           <com.google.android.material.card.MaterialCardView
+               android:id="@+id/card"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content">
+
+               <ImageView
+                   android:id="@+id/iv_detail"
+                   android:layout_width="match_parent"
+                   android:layout_height="256dp"
+                   android:scaleType="centerCrop"
+                   android:src="@drawable/placeholder"/>
+
+           </com.google.android.material.card.MaterialCardView>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="24dp"
+               tools:text="Sehat 100%"
+               android:id="@+id/tv_title"
+               android:textFontWeight="500"
+               android:layout_gravity="center"
+               style="@style/TextAppearance.Material3.TitleLarge"
+               tools:targetApi="p" />
+
+           <TextView
+               android:id="@+id/tv_latin"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_gravity="center"
+               tools:text="@string/app_name"
+               android:textStyle="italic" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/text_indication"
+               android:text="Gejala"
+               android:layout_marginTop="24dp"
+               style="@style/TextAppearance.Material3.TitleMedium"/>
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="8dp"
+               style="@style/TextAppearance.Material3.BodyMedium"
+               android:justificationMode="inter_word"
+               android:id="@+id/tv_indication"
+               tools:text="@tools:sample/lorem" />
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:id="@+id/text_treatment"
+               android:text="Pengendalian"
+               android:layout_marginTop="24dp"
+               style="@style/TextAppearance.Material3.TitleMedium"/>
+
+           <androidx.recyclerview.widget.RecyclerView
+               android:id="@+id/rv_treatment"
+               android:layout_marginTop="6dp"
+               tools:listitem="@layout/item_number_content"
+               android:layout_width="match_parent"
+               android:nestedScrollingEnabled="false"
+               android:layout_height="wrap_content" />
+       </LinearLayout>
+   </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
