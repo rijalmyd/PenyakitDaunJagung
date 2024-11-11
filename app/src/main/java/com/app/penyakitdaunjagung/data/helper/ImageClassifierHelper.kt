@@ -18,7 +18,7 @@ class ImageClassifierHelper(
     val context: Context,
     var threshold: Float = 0.5f,
     var maxResults: Int = 3,
-    val modelName: String = "mobilenet_v1_0.75_160_quantized.tflite",
+    val modelName: String,
     val classifierListener: ClassifierListener?,
 ) {
 
@@ -54,7 +54,7 @@ class ImageClassifierHelper(
         }
 
         val imageProcessor = ImageProcessor.Builder()
-            .add(ResizeOp(150, 150, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
+            .add(ResizeOp(224, 224, ResizeOp.ResizeMethod.NEAREST_NEIGHBOR))
             .add(CastOp(DataType.UINT8))
             .build()
 

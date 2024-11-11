@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string-array name="models">
         <item>MobileNet</item>
-<!--        <item>AlexNet</item>-->
+        <item>AlexNet</item>
     </string-array>
     <string-array name="classes">
         <item>sehat</item>

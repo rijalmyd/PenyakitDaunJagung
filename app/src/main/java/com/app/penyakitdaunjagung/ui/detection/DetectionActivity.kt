@@ -25,7 +25,6 @@ import com.app.penyakitdaunjagung.util.toBitmap
 import com.app.penyakitdaunjagung.view_model.ViewModelFactory
 import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import id.zelory.compressor.Compressor
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.tensorflow.lite.DataType
@@ -42,7 +41,8 @@ class DetectionActivity : AppCompatActivity() {
     }
     private var currentImageUri: Uri? = null
     private var isJagung: Boolean = true
-    private lateinit var imageClassifierHelper: ImageClassifierHelper
+    private lateinit var mobileNetClassifierHelper: ImageClassifierHelper
+    private lateinit var alexNetClassifierHelper: ImageClassifierHelper
     private val viewModel by viewModels<DetectionViewModel> {
         ViewModelFactory.getInstance(this.applicationContext)
     }
@@ -72,8 +72,39 @@ class DetectionActivity : AppCompatActivity() {
             R.layout.item_dropdown,
             resources.getStringArray(R.array.models)
         )
-        imageClassifierHelper = ImageClassifierHelper(
+        mobileNetClassifierHelper = ImageClassifierHelper(
             this,
+            modelName = "mobilenetv2_quantized.tflite",
+            classifierListener = object : ImageClassifierHelper.ClassifierListener {
+                override fun onError(error: String) {
+                    runOnUiThread {
+                        if (loadingDialog.isShowing) {
+                            loadingDialog.dismiss()
+                        }
+                        showToast(error)
+                    }
+                }
+
+                override fun onResults(results: List<Classifications>?, inferenceTime: Long) {
+                    runOnUiThread {
+                        if (!results.isNullOrEmpty()) {
+                            if (results.isNotEmpty() && results[0].categories.isNotEmpty()) {
+                                val category = results[0].categories.firstOrNull()
+                                saveAndNavigate(category)
+                            }
+                        } else {
+                            if (loadingDialog.isShowing) {
+                                loadingDialog.dismiss()
+                            }
+                            showToast("Gambar tidak terklasifikasi sebagai penyakit daun jagung")
+                        }
+                    }
+                }
+            }
+        )
+        alexNetClassifierHelper = ImageClassifierHelper(
+            this,
+            modelName = "alexnet_quantized.tflite",
             classifierListener = object : ImageClassifierHelper.ClassifierListener {
                 override fun onError(error: String) {
                     runOnUiThread {
@@ -196,17 +227,22 @@ class DetectionActivity : AppCompatActivity() {
                 lifecycleScope.launch {
                     currentImageUri?.let {
                         getCornOrNot(it)
-                        imageClassifierHelper.classifyStaticImage(it)
+                        mobileNetClassifierHelper.classifyStaticImage(it)
                     } ?: run {
                         showToast("Pilih gambar terlebih dahulu!")
                     }
                 }
             }
-
             "AlexNet" -> {
-
+                lifecycleScope.launch {
+                    currentImageUri?.let {
+                        getCornOrNot(it)
+                        alexNetClassifierHelper.classifyStaticImage(it)
+                    } ?: run {
+                        showToast("Pilih gambar terlebih dahulu!")
+                    }
+                }
             }
-
             else -> showToast("Model belum dipilih")
         }
     }
